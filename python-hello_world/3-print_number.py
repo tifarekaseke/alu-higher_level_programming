@@ -1,3 +1,3 @@
 #!/usr/bin/python3
-address = "Holberton Battery street"
-print(f"Address: {address}")
+number = 98
+print(f"{number} Battery street")
