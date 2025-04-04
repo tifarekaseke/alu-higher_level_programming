@@ -1,39 +1,20 @@
 #!/usr/bin/python3
+"""adds all arguments to a Python list, and then save them to a file:"""
+
+
 import sys
-from 5-save_to_json_file import save_to_json_file
-from 6-load_from_json_file import load_from_json_file
-
-def main():
-    # Define the file path for the JSON file
-    file_path = "add_item.json"
-
-    # Attempt to load the current list from the file if it exists
-    try:
-        items = load_from_json_file(file_path)
-    except FileNotFoundError:
-        # If file doesn't exist, initialize an empty list
-        items = []
-
-    # Add all command-line arguments (excluding the script name) to the list
-    items.extend(sys.argv[1:])
-
-    # Save the updated list back to the JSON file
-    save_to_json_file(items, file_path)
 
 if __name__ == "__main__":
-    main()
-import json
+    save_to_json_file = __import__('5-save_to_json_file').save_to_json_file
+    load_from_json_file = __import__('6-load_from_json_file') \
+        .load_from_json_file
 
-def save_to_json_file(my_obj, filename):
-    """Write the object to the JSON file."""
-    with open(filename, 'w') as f:
-        json.dump(my_obj, f)
+    try:
+        loadFile = load_from_json_file("add_item.json")
+    except FileNotFoundError:
+        loadFile = []
 
-import json
-
-def load_from_json_file(filename):
-    """Load the object from the JSON file."""
-    with open(filename, 'r') as f:
-        return json.load(f)
-
-
+    argc = len(sys.argv)
+    for idx in range(1, argc):
+        loadFile.append(sys.argv[idx])
+    save_to_json_file(loadFile, "add_item.json")
