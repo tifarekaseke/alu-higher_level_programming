@@ -22,5 +22,18 @@ def main():
 
 if __name__ == "__main__":
     main()
+import json
+
+def save_to_json_file(my_obj, filename):
+    """Write the object to the JSON file."""
+    with open(filename, 'w') as f:
+        json.dump(my_obj, f)
+
+import json
+
+def load_from_json_file(filename):
+    """Load the object from the JSON file."""
+    with open(filename, 'r') as f:
+        return json.load(f)
 
 
